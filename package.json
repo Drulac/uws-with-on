@@ -1,17 +1,16 @@
 {
-	"name": "uws-with-on.js",
-	"version": "1.0.0",
-	"description": "uws superset who allow you to listen on event like with socket.io",
-	"main": "uws-with-on.js",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/Drulac/uws-with-on/"
-	},
-	"author": "drulac",
-	"license": "GPL-3.0",
-	"dependencies": {
-	}
+  "name": "uws-with-on.js",
+  "version": "1.0.0",
+  "description": "uws superset who allow you to listen on event like with socket.io",
+  "main": "uws-with-on.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Drulac/uws-with-on/"
+  },
+  "author": "drulac",
+  "license": "GPL-3.0",
+  "dependencies": {}
 }
