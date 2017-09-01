@@ -41,7 +41,7 @@ you can use it in the client :
 and this on the server :
 ```js
 const WebSocketServer = require('uws').Server;
-const SocketWithOn = require('../socketWithOn.js');
+const SocketWithOn = require('uws-with-on.js');
 const Socket = require('socket.io-with-get');
 const wss = new WebSocketServer({ port: 5000 });
 
