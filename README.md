@@ -60,8 +60,3 @@ wss.on('connection', async function(socket) {
 		console.log(e);
 	}
 });
-<<<<<<< HEAD
-```
-=======
-```
->>>>>>> fecd888b940dd16737777a1ee92c04fbb85220c1
