@@ -6,7 +6,7 @@ use is really easy :
 (these sample uses the [socket.io-with-get.js](https://github.com/Drulac/socket.io-with-GET) superset too)
 
 you can use it in the client :
-```js
+```html
 <!doctype html>
 <html>
 <head>
