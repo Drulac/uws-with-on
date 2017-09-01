@@ -1,6 +1,6 @@
 {
   "name": "uws-with-on.js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "uws superset who allow you to listen on event like with socket.io",
   "main": "uws-with-on.js",
   "scripts": {
