@@ -1,32 +1,32 @@
-class SocketWithOn{
+const EventEmitter = require('events');
+
+class SocketWithOn extends EventEmitter{
 	constructor (ws) {
-		let onsMethod = [];
-
-		this.emit = (event, data)=>{
-			(ws.send || ws.write)(JSON.stringify([event, data]));
-		}
-
-		this.on = (event, cb)=>{
-			onsMethod[event] = cb;
-		}
-
-		let methods = {send: (event, data)=>{}, on: (event, data)=>{}}
+		super();
 
 		const areInNode = (typeof window === 'undefined');
+
+		const write = ws.write !== undefined;
+
+		this.write = (event, data)=>{
+			if(write){
+				ws.write(JSON.stringify([event, data]));
+			}else{
+				ws.send(JSON.stringify([event, data]));
+			}
+		}
 
 		const callEventMethod = (ms)=>{
 			let msg = areInNode ? ms : ms.data;
 			let [event, data] = JSON.parse(msg);
 
-			if(event in onsMethod)
-			{
-				onsMethod[event](data);
-			}
+			this.emit(event, data);
 		};
 
 		if(areInNode)
 		{
 			ws.on('message', callEventMethod);
+			ws.on('data', callEventMethod);
 		}else{
 			ws.onmessage = callEventMethod;
 		}
