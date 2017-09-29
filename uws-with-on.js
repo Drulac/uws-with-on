@@ -3,7 +3,7 @@ class SocketWithOn{
 		let onsMethod = [];
 
 		this.emit = (event, data)=>{
-			ws.send(JSON.stringify([event, data]));
+			(ws.send || ws.write)(JSON.stringify([event, data]));
 		}
 
 		this.on = (event, cb)=>{
