@@ -1,38 +1,39 @@
-const EventEmitter = require('events');
+const EventEmitter = require('events')
+const split = require('split')
 
-class SocketWithOn extends EventEmitter{
-	constructor (ws) {
-		super();
+class SocketWithOn extends EventEmitter {
+	constructor(ws) {
+		super()
 
-		const areInNode = (typeof window === 'undefined');
+		const areInNode = typeof window === 'undefined'
 
-		const write = ws.write !== undefined;
+		const write = ws.write !== undefined
 
-		this.write = (event, data)=>{
-			if(write){
-				ws.write(JSON.stringify([event, data]));
-			}else{
-				ws.send(JSON.stringify([event, data]));
+		this.write = (event, data) => {
+			data = JSON.stringify([event, data]) + '\n'
+			if (write) {
+				ws.write(data)
+			} else {
+				ws.send(data)
 			}
 		}
 
-		const callEventMethod = (ms)=>{
-			let msg = areInNode ? ms : ms.data;
-			let [event, data] = JSON.parse(msg);
+		let totaldata = ''
 
-			this.emit(event, data);
-		};
+		const callEventMethod = (ms) => {
+			let msg =
+				totaldata + (areInNode ? ms : ms.data).toString()
 
-		if(areInNode)
-		{
-			ws.on('message', callEventMethod);
-			ws.on('data', callEventMethod);
-		}else{
-			ws.onmessage = callEventMethod;
+			const parsed = JSON.parse(msg)
+
+			let [event, data] = parsed
+			this.emit(event, data)
 		}
+		const stream = ws.pipe(split())
+		stream.on('data', callEventMethod)
 	}
 }
 
-try{
-	module.exports = SocketWithOn;
-}catch(e){}
+try {
+	module.exports = SocketWithOn
+} catch (e) {}
