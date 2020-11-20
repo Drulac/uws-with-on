@@ -24,6 +24,8 @@ class SocketWithOn extends EventEmitter {
 			let msg =
 				totaldata + (areInNode ? ms : ms.data).toString()
 
+			if (!msg) return
+
 			const parsed = JSON.parse(msg)
 
 			let [event, data] = parsed
